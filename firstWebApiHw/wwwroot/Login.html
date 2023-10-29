@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="login.css" />
+    <script src="Login.js"></script>
+    <title></title>
+</head>
+<body>
+    <p>UserName</p><input class="inputs" id="userName1" />
+    <p>Password</p><input class="inputs" id="password1" />
+    <p><button class="btn" onclick="login()">←⇦To Conect→⇨</button></p>
+    <a class="link" onclick="change()">New User</a>
+    <div style="visibility:hidden" id="register">
+        <p>UserName</p><input class="inputs" id="userName" /><br />
+        <p>Password</p><input class="inputs" id="password"onblur="strengthPassword()"s/><br />
+        <progress id="progress" value="0" max="4"></progress>
+        <p>first Name</p><input class="inputs" id="firstName" /><br />
+        <p>Last Name</p><input class="inputs" id="lastName" /><br /><br />
+        <button class="btn" onclick="register()">←⇦To Register→⇨</button>
+    </div>
+    s
+
+</body>
+</html>

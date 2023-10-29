@@ -1,0 +1,34 @@
+﻿body {
+    text-align: center;
+    font-family: cursive;
+    background-size: 100%;
+    background-color:black;
+}
+
+.btn {
+    width: 350px;
+    height: 30px;
+    font-size: large;
+    font-family: cursive;
+    color: white;
+    background-color: peru;
+    border-color: white;
+    border-width: initial;
+}
+
+.inputs {
+    width: 200px;
+    height: 30px;
+    background-color: olivedrab;
+    border-color: white;
+    color: white;
+}
+.link {
+    font-size:x-large;
+    color:dimgray;   
+}
+p {
+    font-size: xx-large;
+    color: white;
+    margin-top:1.5px;
+}
