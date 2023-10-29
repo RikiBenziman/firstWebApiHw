@@ -13,14 +13,20 @@ namespace firstWebApiHw.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        UserService userService = new UserService();
+        IUserService _userService;
+
+        public UsersController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         // GET: api/<user>
         [HttpGet]
         public ActionResult<User> Get([FromQuery] string UserName, [FromQuery] string Password)
         {
             try
             {
-            User user = userService.getUserByUserNameAndPassword(UserName, Password);
+            User user = _userService.getUserByUserNameAndPassword(UserName, Password);
             if (user != null)
                 return Ok(user);
             else return BadRequest();
@@ -39,7 +45,7 @@ namespace firstWebApiHw.Controllers
         {
             try
             {
-                User newUser = userService.createNewUser(user);
+                User newUser = _userService.createNewUser(user);
                 if (newUser != null)
                     return CreatedAtAction(nameof(Get), new { id = user.userId }, user);
                 else return BadRequest();
@@ -59,12 +65,12 @@ namespace firstWebApiHw.Controllers
         {
             try
             {
-                var result = userService.checkPassword(userToUpdate.Password);
+                var result = _userService.checkPassword(userToUpdate.Password);
                 if (result < 2)
                     return BadRequest(result);
                 else
                 {
-                    userService.update(id, userToUpdate);
+                    _userService.update(id, userToUpdate);
                     return Ok(result);
                 }
             }
@@ -86,7 +92,7 @@ namespace firstWebApiHw.Controllers
         [HttpPost]
         public ActionResult<int> Post([FromBody] string password)
         {
-            var result = userService.checkPassword(password);
+            var result = _userService.checkPassword(password);
             if (result < 2)
                 return BadRequest(result);
             else
