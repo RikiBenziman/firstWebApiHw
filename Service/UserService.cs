@@ -14,9 +14,9 @@ using Repository;
             _userRepository = userRepository;
         }
 
-        public User getUserByUserNameAndPassword(string UserName, string Password)
+        public async Task<User> getUserByUserNameAndPassword(string UserName, string Password)
         {
-            User newUser = _userRepository.getUserByUserNameAndPassword(UserName, Password);
+            User newUser = await _userRepository.getUserByUserNameAndPassword(UserName, Password);
             if (newUser != null) return newUser;
             else return null;
         }
@@ -27,9 +27,9 @@ using Repository;
             else return null;
         }
 
-        public void update(int id, User userToUpdate)
+        public async Task update(int id, User userToUpdate)
         {
-            _userRepository.update(id, userToUpdate);
+            await _userRepository.update(id, userToUpdate);
         }
 
 

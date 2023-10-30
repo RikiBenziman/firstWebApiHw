@@ -6,7 +6,7 @@ namespace Service
     {
         int checkPassword(string password);
         User createNewUser(User user);
-        User getUserByUserNameAndPassword(string UserName, string Password);
-        void update(int id, User userToUpdate);
+        Task<User> getUserByUserNameAndPassword(string UserName, string Password);
+        Task update(int id, User userToUpdate);
     }
 }

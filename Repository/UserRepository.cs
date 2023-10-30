@@ -1,20 +1,20 @@
 ﻿using Entities;
 using System.Text.Json;
-using System;
+
 
 namespace Repository
 {
     public class UserRepository : IUserRepository
     {
         string url = "../myUsers.txt";
-        public User getUserByUserNameAndPassword(string UserName, string Password)
+        public async Task<User> getUserByUserNameAndPassword(string UserName, string Password)
         {
             using (StreamReader reader = System.IO.File.OpenText(url))
             {
                 string? currentUserInFile;
-                while ((currentUserInFile = reader.ReadLine()) != null)
+                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
                 {
-                    User user = JsonSerializer.Deserialize<User>(currentUserInFile);
+                    User user =  JsonSerializer.Deserialize<User>(currentUserInFile);
                     if (user.UserName == UserName && user.Password == Password)
                         return user;
                 }
@@ -33,13 +33,13 @@ namespace Repository
 
         }
 
-        public void update(int id, User userToUpdate)
+        public async Task update(int id, User userToUpdate)
         {
             string textToReplace = string.Empty;
             using (StreamReader reader = System.IO.File.OpenText(url))
             {
                 string currentUserInFile;
-                while ((currentUserInFile = reader.ReadLine()) != null)
+                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
                 {
 
                     User user = JsonSerializer.Deserialize<User>(currentUserInFile);
@@ -55,11 +55,5 @@ namespace Repository
                 System.IO.File.WriteAllText(url, text);
             }
         }
-
-
-
-
-
-
     }
 }

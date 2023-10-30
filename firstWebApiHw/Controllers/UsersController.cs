@@ -22,11 +22,11 @@ namespace firstWebApiHw.Controllers
 
         // GET: api/<user>
         [HttpGet]
-        public ActionResult<User> Get([FromQuery] string UserName, [FromQuery] string Password)
+        public async Task<ActionResult<User>> Get([FromQuery] string UserName, [FromQuery] string Password)
         {
             try
             {
-            User user = _userService.getUserByUserNameAndPassword(UserName, Password);
+            User user = await _userService.getUserByUserNameAndPassword(UserName, Password);
             if (user != null)
                 return Ok(user);
             else return BadRequest();
@@ -61,7 +61,7 @@ namespace firstWebApiHw.Controllers
 
         // PUT api/<user>/5
         [HttpPut("{id}")]
-        public ActionResult<int> Put(int id, [FromBody] User userToUpdate)
+        public async Task<ActionResult<int>> Put(int id, [FromBody] User userToUpdate)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace firstWebApiHw.Controllers
                     return BadRequest(result);
                 else
                 {
-                    _userService.update(id, userToUpdate);
+                   await _userService.update(id, userToUpdate);
                     return Ok(result);
                 }
             }
@@ -82,11 +82,11 @@ namespace firstWebApiHw.Controllers
             
         }
 
-        //// DELETE api/<user>/5
+        // DELETE api/<user>/5
         //[HttpDelete("{id}")]
         //public void Delete(int id)
         //{
-        //} 
+        //}
 
         [Route("password")]
         [HttpPost]
