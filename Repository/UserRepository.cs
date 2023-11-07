@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 
@@ -6,54 +7,34 @@ namespace Repository
 {
     public class UserRepository : IUserRepository
     {
+        MySuperMarketContext _MySuperMarketContext;
+        public UserRepository(MySuperMarketContext _mySuperMarketContext)
+        {
+            _MySuperMarketContext = _mySuperMarketContext;
+        }
+
         string url = "../myUsers.txt";
-        public async Task<User> getUserByUserNameAndPassword(string UserName, string Password)
+        public async Task<User> getUserByUserNameAndPassword(string userName, string password)
         {
-            using (StreamReader reader = System.IO.File.OpenText(url))
-            {
-                string? currentUserInFile;
-                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
-                {
-                    User user =  JsonSerializer.Deserialize<User>(currentUserInFile);
-                    if (user.UserName == UserName && user.Password == Password)
-                        return user;
-                }
-
-            }
-            return null;
+            return await _MySuperMarketContext.Users.Where(User => User.UserName == userName && User.Password == password).FirstOrDefaultAsync();
         }
 
-        public User createNewUser(User user)
+        public async Task<User> createNewUser(User user)
         {
-            int numberOfUsers = System.IO.File.ReadLines(url).Count();
-            user.userId = numberOfUsers + 1;
-            string userJson = JsonSerializer.Serialize(user);
-            System.IO.File.AppendAllText(url, userJson + Environment.NewLine);
+            await _MySuperMarketContext.Users.AddAsync(user);
+            _MySuperMarketContext.SaveChangesAsync();
             return user;
-
         }
 
-        public async Task update(int id, User userToUpdate)
+        public async Task<User> update(int id, User userToUpdate)
         {
-            string textToReplace = string.Empty;
-            using (StreamReader reader = System.IO.File.OpenText(url))
-            {
-                string currentUserInFile;
-                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
-                {
-
-                    User user = JsonSerializer.Deserialize<User>(currentUserInFile);
-                    if (user.userId == id)
-                        textToReplace = currentUserInFile;
-                }
-            }
-
-            if (textToReplace != string.Empty)
-            {
-                string text = System.IO.File.ReadAllText(url);
-                text = text.Replace(textToReplace, JsonSerializer.Serialize(userToUpdate));
-                System.IO.File.WriteAllText(url, text);
-            }
+            _MySuperMarketContext.Users.Update(userToUpdate);
+            _MySuperMarketContext.SaveChangesAsync();
+            return userToUpdate;
+        }
+       public async Task<User> getUserById(int id)
+        {
+            return await _MySuperMarketContext.Users.Where(User => User.UserId == id).FirstOrDefaultAsync();
         }
     }
 }

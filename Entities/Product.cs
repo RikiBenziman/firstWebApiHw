@@ -5,7 +5,7 @@ namespace Entities;
 
 public partial class Product
 {
-    public int Id { get; set; }
+    public int ProductId { get; set; }
 
     public int CategoryId { get; set; }
 
@@ -18,4 +18,6 @@ public partial class Product
     public string? ProductImage { get; set; }
 
     public virtual Category Category { get; set; } = null!;
+
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

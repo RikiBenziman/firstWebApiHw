@@ -1,8 +1,6 @@
-const change = () => {
+const showRegisterationForm = () => {
     const register = document.getElementById("register")
     register.style.visibility ="unset"
-
-
 }
 
 const register = async() =>{
@@ -15,8 +13,9 @@ const register = async() =>{
     
     try {
     const progress = document.getElementById("progress").value;
-    if (progress < 2)
-    throw new Error("Easy password,please change your password")
+        if (progress < 2)
+            alert("Easy password,please change your password")
+        else { 
         const res = await fetch('api/Users',
             {
                 method: 'POST',
@@ -25,16 +24,19 @@ const register = async() =>{
 
             })
         if (!res.ok)
-            alert("error added to the server,please try again! and see if all file as required.")
+            alert("Registeration failed, please try again!!")
         else 
         {
             const data = await res.json()
-            alert(`user ${data.userName} registered succfully`)
+            alert(`user ${data.userName} registered successfully`)
+            }
         }
     }
 
     catch (e)
-    { alert(e) }
+    {
+        alert(e.massage)
+    }
 }
 
 const login = async () => {
@@ -62,27 +64,30 @@ const update = async () => {
     const user = {
        
         UserName: document.getElementById("userNameToUpdate").value,
-        Password: document.getElementById("passwordToUpdate").value,
+        Password: document.getElementById("password").value,
         FirstName: document.getElementById("firstNameToUpdate").value,
         LastName: document.getElementById("lastNameToUpdate").value
     }
     try {
-        const userJson = sessionStorage.getItem("user")
-        const id = JSON.parse(userJson).userId
-        const res = await fetch(`api/Users/${id}`,
-        {
-            method: 'PUT',
-            headers: { 'Content-Type':`application/json` },
-            body: JSON.stringify(user)
-        })
-        if (!res.ok)
-            alert("your password is not sequrity, please enter another password. tanks!")
+        const progress = document.getElementById("progress").value;
+        if (progress < 2)
+            alert("Easy password,please change your password")
         else {
-           
-            alert(`user ${id} updated succfully`)
+            const userJson = sessionStorage.getItem("user")
+            const id = JSON.parse(userJson).userId
+            const res = await fetch(`api/Users/${id}`,
+                {
+                    method: 'PUT',
+                    headers: { 'Content-Type': `application/json` },
+                    body: JSON.stringify(user)
+                })
+            if (!res.ok)
+                alert("your password is not sequrity, please enter another password. tanks!")
+            else {
+
+                alert(`user ${id} updated succfully`)
+            }
         }
-
-
     } catch (e) {
       alert(e)
     }
@@ -100,23 +105,24 @@ async function strengthPassword() {
                 body: JSON.stringify(password)
 
             })
-        if (!res.ok)
-            alert("this password not strength")
-        const progress = document.getElementById("progress")
+        if (!res.ok) { 
+            alert("The password is not strong or weak password")
+            progress.value = 0;
+     }
+    else
+    {
         const result = await res.json()
-        progress.value = result
-
-    } catch (e) {
+            progress.value = result;
+    }
+ }
+    catch (e) {
         alert(e.massage)
     }
-
-
-
-
 } 
-
-const hellow = document.createElement('p')
-document.body.appendChild(hellow)
+const displayUserName = () => { 
+const hello = document.createElement('p')
+document.body.appendChild(hello)
 const userJson = sessionStorage.getItem("user")
 const firstName=JSON.parse(userJson).firstName
-hellow.innerText =`wellcom to ${firstName}`
+    hello.innerText = `wellcom to ${firstName}`
+}

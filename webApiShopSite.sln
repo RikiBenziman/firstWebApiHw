@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "firstWebApiHw", "firstWebApiHw\firstWebApiHw.csproj", "{C5CB0D10-FE79-4306-8FB6-00A198DC5A07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webApiShopSite", "firstWebApiHw\webApiShopSite.csproj", "{C5CB0D10-FE79-4306-8FB6-00A198DC5A07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{A33A681B-13C0-4776-A5B4-54E663CEF1E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repository\Repositories.csproj", "{A33A681B-13C0-4776-A5B4-54E663CEF1E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{C7816363-7470-4341-A973-FBBC5DE10BE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{C7816363-7470-4341-A973-FBBC5DE10BE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{3F3CE13B-E8AB-4B88-9F1A-430609F7A920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Service\Services.csproj", "{3F3CE13B-E8AB-4B88-9F1A-430609F7A920}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solusion Items", "Solusion Items", "{67014A39-1319-4D01-A296-DA021F3D5E2D}"
 	ProjectSection(SolutionItems) = preProject
