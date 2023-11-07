@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities;
+using Microsoft.AspNetCore.Mvc;
+using Service;
+using Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,13 +9,30 @@ namespace webApiShopSite.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         // GET: api/<ProductController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        IProductService _productService;
+
+        public ProductsController(IProductService ProductService)
         {
-            return new string[] { "value1", "value2" };
+            _productService = ProductService;
+        }
+        [HttpGet]
+        public async Task<IEnumerable<Category>> GetAllProduct()
+        {
+            try
+            {
+                Product product = await _productService.getAllProduct();
+                return null;
+                //User user = await _userService.getUserByUserNameAndPassword();
+                //return user != null ? Ok(user) : Unauthorized();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         // GET api/<ProductController>/5
