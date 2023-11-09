@@ -9,7 +9,6 @@ public partial class OrderItem
     public int OrderItemId { get; set; }
 
     public int ProductId { get; set; }
-    [JsonIgnore]
     public int OrderId { get; set; }
 
     public int UserId { get; set; }
