@@ -18,7 +18,8 @@ namespace Services
         }
         public async Task<List<Product>> getAllProduct()
         {
-            return await _ProductRepository.getAllProduct();
+            List<Product> products= await _ProductRepository.getAllProduct();
+            return products != null ? products : null;
         }
 
     }

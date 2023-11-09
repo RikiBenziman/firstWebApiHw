@@ -17,17 +17,14 @@ using Repository;
         public async Task<User> getUserByUserNameAndPassword(string UserName, string Password)
         {
             User newUser = await _userRepository.getUserByUserNameAndPassword(UserName, Password);
-            if (newUser != null) return newUser;
-            return null;
+            return newUser != null?  newUser:null;
         }
         public async Task<User> createNewUser(User user)
         {
             if (checkPassword(user.Password) < 2)
                 return null;
             User newUser = await _userRepository.createNewUser(user);
-            if (newUser != null)
-                return newUser;
-             return null;
+            return newUser != null ? newUser : null;
         }
 
         public async Task<User> update(int id, User userToUpdate)
@@ -46,8 +43,7 @@ using Repository;
         public async Task<User> getUserById(int id)
         {
             User newUser = await _userRepository.getUserById(id);
-            if (newUser != null) return newUser;
-            else return null;
+            return newUser != null ? newUser : null;
         }
     }
 }

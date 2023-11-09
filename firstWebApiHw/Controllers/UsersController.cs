@@ -68,7 +68,7 @@ namespace firstWebApiHw.Controllers
 
         }
         //GETuserById api/<user>/5
-        [HttpDelete("{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get( int id)
         {
             try
