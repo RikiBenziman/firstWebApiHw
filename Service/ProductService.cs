@@ -16,13 +16,9 @@ namespace Services
         {
             _ProductRepository = productRepository;
         }
-        public async Task<Product> getAllProduct(Product product)
+        public async Task<List<Product>> getAllProduct()
         {
-
-            Product products = await _ProductRepository.getAllProduct(product);
-            if (products != null) return products;
-                    return null;
-           
+            return await _ProductRepository.getAllProduct();
         }
 
     }

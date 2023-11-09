@@ -20,44 +20,16 @@ namespace webApiShopSite.Controllers
             _productService = ProductService;
         }
         [HttpGet]
-        public async Task<IEnumerable<Category>> GetAllProduct()
+        public async Task<IEnumerable<Product>> GetAllProduct()
         {
             try
             {
-                Product product = await _productService.getAllProduct();
-                return null;
-                //User user = await _userService.getUserByUserNameAndPassword();
-                //return user != null ? Ok(user) : Unauthorized();
+                return await _productService.getAllProduct();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-
-        // GET api/<ProductController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ProductController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ProductController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
+     }
 }

@@ -8,17 +8,16 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class CategoryRepository : ICategoryRepository
     {
         MySuperMarketContext _MySuperMarketContext;
-        public ProductRepository(MySuperMarketContext _mySuperMarketContext)
+        public CategoryRepository(MySuperMarketContext _mySuperMarketContext)
         {
             _MySuperMarketContext = _mySuperMarketContext;
         }
-
-        public async Task<List<Product>> getAllProduct()
+        public async Task<List<Category>> GetAllCategories()
         {
-            return await _MySuperMarketContext.Products.ToListAsync();
+            return await _MySuperMarketContext.Categories.ToListAsync();
         }
     }
 }
