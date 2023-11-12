@@ -14,7 +14,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
-      "applicationUrl": "http://localhost:5142",
+      "applicationUrl": "SuperMarket.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -32,7 +32,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "Login.html",
+      "launchUrl": "SuperMarket.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

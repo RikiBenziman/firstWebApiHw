@@ -1,7 +1,18 @@
 body{
    /* background-color:black;*/
 }
-.tmp-prod{
-    width:40vw;
-    height:80vh;
+.tmp-prod {
+
+}
+#products {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: baseline;
+}
+img {
+    width: 20vw;
+    height: 26vh
 }
