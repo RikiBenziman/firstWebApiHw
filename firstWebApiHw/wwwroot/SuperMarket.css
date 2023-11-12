@@ -11,8 +11,10 @@ body{
     align-content: stretch;
     justify-content: center;
     align-items: baseline;
+    height:80vh;
+    width:160vh
 }
 img {
-    width: 20vw;
+    width: 15vw;
     height: 26vh
 }
