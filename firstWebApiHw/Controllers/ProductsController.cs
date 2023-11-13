@@ -20,11 +20,11 @@ namespace webApiShopSite.Controllers
             _productService = ProductService;
         }
         [HttpGet]
-        public async Task<IEnumerable<Product>> GetAllProduct()
+        public async Task<IEnumerable<Product>> GetAllProduct(string? desc, int? minPrice, int? maxPrice, [FromQuery] int?[] categoryIds)
         {
             try
             {
-                return await _productService.getAllProduct();
+                return await _productService.getAllProduct( desc,  minPrice,  maxPrice,  categoryIds);
             }
             catch (Exception ex)
             {

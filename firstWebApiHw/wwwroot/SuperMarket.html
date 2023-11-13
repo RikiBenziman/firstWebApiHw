@@ -22,8 +22,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="../Scripts/SuperMarket.js"></script>
-    <link href="../Style/SuperMarket.css" rel="stylesheet" />
+    <script src="SuperMarket.js"></script>
+    <link href="SuperMarket.css" rel="stylesheet" />
 
     <meta charset="utf-8" />
 
@@ -41,20 +41,17 @@
     </template>
     <template id="temp-category">
         <div class="cb checkbox">
-            <input type="checkbox" class="opt" id="" value="">
+            <input onclick="filterProducts()" type="checkbox" class="opt" id="" value="">
             <label for="">
                 <span class="OptionName"></span>
                 <span class="Count"></span>
-                </a>
             </label>
         </div>
     </template>
 </head>
-<body>
+<body onload="showProducts();showCategories()">
     <header>
         <div class="bar">
-
-
             <section class="QuickLinks">
                 <ul>
                     <li class="" data-section="myAccount">
