@@ -5,18 +5,17 @@ const getAllProducts = async (desc, minPrice, maxPrice, categoryIds) => {
         let url = `https://localhost:44354/api/Products`;
         if (desc || minPrice || maxPrice || categoryIds) url += `?`;
            
-        if (desc)url += ` desc = ${desc}`;
+        if (desc) url += `&desc=${desc}`;
             
-        if (minPrice)url += ` minPrice = ${minPrice}`;
+        if (minPrice) url += `&minPrice=${minPrice}`;
             
-        if (maxPrice)url += ` maxPrice = ${maxPrice}`;
-            
+        if (maxPrice) url += `&maxPrice=${maxPrice}`;
         if (categoryIds) {
             for (let i = 0; i < categoryIds.length; i++) {
                 url += `&categoryIds=${categoryIds[i]}`;
             }
         }
-        const res = await fetch(url)
+        const res = await fetch(url);
         const products = await res.json();
         return products;
     }
@@ -63,13 +62,14 @@ const showCategories = async () => {
 const filterProducts = async () => {
     let checkedArr = [];
     var allCategoriesOptions = document.querySelectorAll(".opt");
-    for (i = 0; i < allCategoriesOptions.length; i++) {
-        if (allCategoriesOptions[i].checked) checkedArr.push(allCategoriesOptions[i]);
+    for (i = 0; i < allCategoriesOptions.length; i++)
+        if (allCategoriesOptions[i].checked) checkedArr.push(allCategoriesOptions[i].id);
+
         let getMinPrice = document.getElementById("minPrice").value; 
         let getMaxPrice = document.getElementById("maxPrice").value; 
         let getDesc = document.getElementById("nameSearch").value; 
         const products = await getAllProducts(getDesc, getMinPrice, getMaxPrice, checkedArr);
-        document.getElementById("ProductsList").children = [];
+        document.getElementById("PoductList").replaceChildren([]);
         for (let i = 0; i < products.length; i++) {
             var tmpProd = document.getElementById("temp-card");
             var cln = tmpProd.content.cloneNode(true);
@@ -82,4 +82,3 @@ const filterProducts = async () => {
 
     }
 
-}
