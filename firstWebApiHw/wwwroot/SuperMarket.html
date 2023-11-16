@@ -1,24 +1,4 @@
-﻿<!--<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    <link rel="stylesheet" href="SuperMarket.css" />
-    <script src="SuperMarket.js"></script>
-</head>
-<body onload="showProduct()">
-    <div id="products"></div>
-<template id="tmp-prod" >
-    <div class="tmp-prod">
-            <img src=" " alt=" " />
-        <h2> </h2>
-        <h3> </h3>
-        <p id="tmp-p"> </p>
-        <button>add to card </button>
-    </div>
-</template>
-</body>
-</html>-->
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +16,7 @@
             <h1></h1>
             <p class="price"></p>
             <p class="description"></p>
-            <p><button>הוסף לסל</button></p>
+            <p><button >הוסף לסל</button></p>
         </div>
     </template>
     <template id="temp-category">
@@ -104,19 +84,17 @@
             <input type="text" id="nameSearch" class="floatRight" placeholder="חיפוש לפי שם מוצר">
 
             <button class="floatRight" tabindex="0" onclick="filterProducts()">
-                <span class="header42"><img src="Images/searchIcon.svg" alt="סמל חיפוש"></span>
+                <span class="header42"><img src="images/searchIcon.svg" alt="סמל חיפוש"></span>
             </button>
         </div>
         <div id="priceRangeFilter" class="filterBreak">
             <div><span id="counter">  </span> מחיר:</div>
-
-            <input type="text" maxlength="9" id="minPrice" class="priceInputText">
+            <input type="text" maxlength="9" id="minPrice" class="priceInputText" placeholder="Min">
             <span class="priceCurrency">₪</span>
-
-            <input type="text" maxlength="9" id="maxPrice" class="priceInputText">
+            <input type="text" maxlength="9" id="maxPrice" class="priceInputText" placeholder="Max">
             <span class="priceCurrency">₪</span>
             <button onclick="filterProducts()">
-                <span><img src="Images/searchIcon.svg" alt="סמל חיפוש"></span>
+            <span><img src="images/searchIcon.svg" alt="סמל חיפוש"></span>
             </button>
         </div>
     </div>
