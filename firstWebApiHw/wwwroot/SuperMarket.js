@@ -38,6 +38,8 @@ const showProducts = async () => {
         cln.querySelector("button").addEventListener('click', () => { addToCard(products[i]) })     
         document.getElementById("PoductList").appendChild(cln);
     }
+    let count = products.length;
+    document.getElementById("counter").innerText = count;
 }
 const getAllCartegories = async () => {
     try {
@@ -66,8 +68,7 @@ const filterProducts = async () => {
     let checkedArr = [];
     var allCategoriesOptions = document.querySelectorAll(".opt");
     for (i = 0; i < allCategoriesOptions.length; i++)
-        if (allCategoriesOptions[i].checked) checkedArr.push(allCategoriesOptions[i].id);
-     
+        if (allCategoriesOptions[i].checked) checkedArr.push(allCategoriesOptions[i].id);  
     let getMinPrice = document.getElementById("minPrice").value;
     let getMaxPrice = document.getElementById("maxPrice").value;
     let getDesc = document.getElementById("nameSearch").value;
