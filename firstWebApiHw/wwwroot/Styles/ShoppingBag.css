@@ -22,7 +22,9 @@ th {
  td.imageColumn {
     width: 66px;
 }
-
+img.image{
+    width:100px;
+}
 th.itemsColumn,td.imageColumn {
     padding-right: 10px;
 }
@@ -45,8 +47,8 @@ td {
 
 
 .availabilityColumn {
-    width: 205px;
-    min-width: 205px;
+    width: 100px;
+    min-width: 100px;
     max-width: 205px;
     font-size: 14px;
     color: #4D8958;

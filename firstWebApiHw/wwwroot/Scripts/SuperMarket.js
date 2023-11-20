@@ -38,8 +38,7 @@ const showProducts = async () => {
         cln.querySelector("button").addEventListener('click', () => { addToCard(products[i]) })     
         document.getElementById("PoductList").appendChild(cln);
     }
-    let count = products.length;
-    document.getElementById("counter").innerText = count;
+    document.getElementById("ItemsCountText").innerText = (JSON.parse(sessionStorage.getItem("MyCard"))).length;
 }
 const getAllCartegories = async () => {
     try {
@@ -86,16 +85,14 @@ const filterProducts = async () => {
         document.getElementById("PoductList").appendChild(cln);
     }
 }
-let ArrayCard = [];
-let counter=0;
+
 const addToCard = (product) => {
-    counter++;
-    console.log("counter", counter);
-    document.getElementById("ItemsCountText").innerText = counter;
-    ArrayCard.push(product);
-    console.log("productCard", product);
-    sessionStorage.setItem("ProductsCard", JSON.stringify(ArrayCard));
-    console.log("arrayCard", ArrayCard);
+    document.getElementById("ItemsCountText").innerText++;
+    if (sessionStorage.length == 0) sessionStorage.setItem("MyCard", "[]");
+    let card = JSON.parse(sessionStorage.getItem("MyCard"));
+    myCard = [...card, product];
+    let MyCard = JSON.stringify(myCard);
+    sessionStorage.MyCard = MyCard;
  }
 
 
