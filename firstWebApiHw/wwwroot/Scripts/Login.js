@@ -50,7 +50,7 @@ const login = async () => {
         else { 
             const user=await res.json()
             sessionStorage.setItem("user", JSON.stringify(user))
-            window.location.href="Update.html"
+            window.location.href="SuperMarket.html"
         }
     } catch (e) {
         alert(e)

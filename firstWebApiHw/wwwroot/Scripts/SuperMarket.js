@@ -95,4 +95,12 @@ const addToCard = (product) => {
     sessionStorage.MyCard = MyCard;
  }
 
-
+const TrackLinkID = () => {
+    if (sessionStorage.getItem("user")) {
+        document.querySelector(".MyAcount").href = "/Update.html";
+    }
+       
+    else {
+        document.querySelector(".MyAcount").href = "/Login.html";
+    }
+}

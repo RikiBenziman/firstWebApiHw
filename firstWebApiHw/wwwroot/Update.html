@@ -7,18 +7,19 @@
     <title></title>
 </head>
 <body onload="displayUserName()">
-    <div id="root" ></div>
+    <div id="root"></div>
     <script src="Scripts/Login.js"></script>
     <a class="link" onclick="showRegisterationForm()">←⇦ToUpdate Your Personal Information→⇨</a>
     <script>sessionStorage</script>
     <div style="visibility:hidden" id="register">
         <p>UserName</p><input class="inputs" id="userNameToUpdate" /><br />
-        <p>Password</p><input class="inputs" id="password" onblur="strengthPassword()"/><br/>
+        <p>Password</p><input class="inputs" id="password" onblur="strengthPassword()" /><br />
         <progress id="progress" value="0" max="4"></progress><br />
         <p>FirstName</p><input class="inputs" id="firstNameToUpdate" /><br />
         <p>LastName</p><input class="inputs" id="lastNameToUpdate" /><br /><br />
         <button class="btn" onclick="update()">←⇦To Update→⇨</button>
-    </div>
 
+    </div>
+    <a href="SuperMarket.html">to continue the shop</a>
 </body>
 </html>
