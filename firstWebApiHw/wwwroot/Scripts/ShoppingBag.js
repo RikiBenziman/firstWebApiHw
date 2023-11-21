@@ -45,23 +45,23 @@ const closeOrder =async () => {
         document.querySelector(".setUser").href = "/Login.html";
     }
     else {
-        let MyCard = sessionStorage.getItem("MyCard");
+        let MyCard =JSON.parse( sessionStorage.getItem("MyCard"));
         const orderItem = {
             Quantity:0,
             ProductId:0
         };
         const order = {
-            OderDate: new Date,
+            OderDate: new Date(),
             OrderSum: 0,
-            UseId: (JSON.parse(sessionStorage.getItem("user"))).useId,
+            UserId: (JSON.parse(sessionStorage.getItem("user"))).userId,
             OrderItems: []
         };
         while (MyCard.length != 0) {
             let mycard = MyCard[0];
             let count = MyCard.filter(p => p.productId == mycard.productId);
             orderItem.Quantity = count.length;
-            orderItem.ProductId = (JSON.parse(sessionStorage.getItem("user"))).useId;
-            order.OrderItems = [...OrderItems, orderItem];
+            orderItem.ProductId = mycard.productId;
+            order.OrderItems = [...order.OrderItems, orderItem];
             order.OrderSum += mycard.productPrice * count.length;
             MyCard = MyCard.filter(p => p.productId != mycard.productId);
         }
