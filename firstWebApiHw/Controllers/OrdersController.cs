@@ -1,4 +1,6 @@
-﻿using Entities;
+﻿using AutoMapper;
+using DTO;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -12,26 +14,31 @@ namespace webApiShopSite.Controllers
     {
         // POST api/<OrdersController>
         IOrderService _orderService;
-        public OrdersController(IOrderService orderService)
+        IMapper _mapper;
+        public OrdersController(IOrderService orderService,IMapper mapper)
         {
             _orderService = orderService;
+            _mapper = mapper;
         }
         [HttpPost]
-        public async Task<ActionResult<Order>> Post([FromBody] Order order)
+        public async Task<ActionResult<OrderDto>> Post([FromBody] OrderDto orderDto)
         {
             try
             {
-                Order newOrder = await _orderService.creatOrder(order);
-                return newOrder != null ? CreatedAtAction(nameof(Get), new { id = newOrder.UserId }, newOrder) : NoContent();
+                
+                Order Order = _mapper.Map< OrderDto,Order>(orderDto);
+                Order newOrder = await _orderService.creatOrder(Order);
+                return newOrder != null ? CreatedAtAction(nameof(Get), new { id = orderDto.UserId }, orderDto) : NoContent();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        private object Get()
+        [HttpGet("{id}")]
+        private string Get(int id)
         {
-            throw new NotImplementedException();
+            return "value";
         }
     }
 }

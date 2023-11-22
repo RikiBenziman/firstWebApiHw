@@ -42,9 +42,16 @@ const register = async() =>{
 const login = async () => {
 
     try {
-        const UserName=document.getElementById("userName1").value
-        const Password= document.getElementById("password1").value
-        const res = await fetch(`api/Users?UserName=${UserName}&Password=${Password}`)
+        const UserNameAndPassword = {
+            UserName: document.getElementById("userName1").value,
+            Password: document.getElementById("password1").value
+        }
+        const res = await fetch('api/Users/UserNameAndPassword',
+            {
+                method: "POST",
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(UserNameAndPassword)
+            });
         if (!res.ok)
             window.alert("userName or password are not valid")
         else { 
@@ -60,9 +67,7 @@ const login = async () => {
 
 }
 const update = async () => {
-  
     const user = {
-       
         UserName: document.getElementById("userNameToUpdate").value,
         Password: document.getElementById("password").value,
         FirstName: document.getElementById("firstNameToUpdate").value,
@@ -84,7 +89,11 @@ const update = async () => {
             if (!res.ok)
                 alert("your password is not sequrity, please enter another password. tanks!")
             else {
-
+                sessionStorage.user = JSON.stringify(await res.json());
+                const userJson = sessionStorage.getItem("user")
+                const firstName = JSON.parse(userJson).firstName
+             
+                document.getElementById("hello").innerText = `wellcom to ${firstName}`
                 alert(`user ${id} updated succfully`)
             }
         }
@@ -120,7 +129,8 @@ async function strengthPassword() {
     }
 } 
 const displayUserName = () => { 
-const hello = document.createElement('p')
+    const hello = document.createElement('p')
+hello.id="hello"
 document.body.appendChild(hello)
 const userJson = sessionStorage.getItem("user")
 const firstName=JSON.parse(userJson).firstName

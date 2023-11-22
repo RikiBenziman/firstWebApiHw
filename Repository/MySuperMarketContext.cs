@@ -26,7 +26,8 @@ public partial class MySuperMarketContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    => optionsBuilder.UseSqlServer("Server=srv2\\pupils;Database=MySuperMarket;Trusted_Connection=True;TrustServerCertificate=True");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=srv2\\pupils;Database=MySuperMarket;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -74,7 +75,6 @@ public partial class MySuperMarketContext : DbContext
             entity.Property(e => e.OrderId).HasColumnName("ORDER_ID");
             entity.Property(e => e.ProductId).HasColumnName("PRODUCT_ID");
             entity.Property(e => e.Quantity).HasColumnName("QUANTITY");
-            entity.Property(e => e.UserId).HasColumnName("USER_ID");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
@@ -85,11 +85,6 @@ public partial class MySuperMarketContext : DbContext
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__ORDERS_IT__PRODU__3F466844");
-
-            entity.HasOne(d => d.User).WithMany(p => p.OrderItems)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ORDERS_IT__USER___412EB0B6");
         });
 
         modelBuilder.Entity<Product>(entity =>

@@ -82,6 +82,7 @@ const filterProducts = async () => {
         cln.querySelector("h1").innerText = products[i].productName;
         cln.querySelector("p.description").innerText = products[i].productDescription;
         cln.querySelector("p.price").innerText = products[i].productPrice + '$';
+        cln.querySelector("button").addEventListener('click', () => { addToCard(products[i]) })     
         document.getElementById("PoductList").appendChild(cln);
     }
 }

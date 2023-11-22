@@ -46,10 +46,7 @@ const closeOrder =async () => {
     }
     else {
         let MyCard =JSON.parse( sessionStorage.getItem("MyCard"));
-        const orderItem = {
-            Quantity:0,
-            ProductId:0
-        };
+        let totalSum = 0;
         const order = {
             OderDate: new Date(),
             OrderSum: 0,
@@ -57,14 +54,17 @@ const closeOrder =async () => {
             OrderItems: []
         };
         while (MyCard.length != 0) {
-            let mycard = MyCard[0];
-            let count = MyCard.filter(p => p.productId == mycard.productId);
-            orderItem.Quantity = count.length;
-            orderItem.ProductId = mycard.productId;
+            let prod = MyCard[0];
+            let count = MyCard.filter(p => p.productId == prod.productId);
+            let orderItem = {
+                Quantity: count,
+                ProductId: prod.productId
+            };
             order.OrderItems = [...order.OrderItems, orderItem];
-            order.OrderSum += mycard.productPrice * count.length;
-            MyCard = MyCard.filter(p => p.productId != mycard.productId);
+            totalSum += prod.productPrice * count.length;
+            MyCard = MyCard.filter(p => p.productId != prod.productId);
         }
+        order.OrderSum = totalSum;
     }
   try {
       const res = await fetch("https://localhost:44354/api/Orders" ,
@@ -78,10 +78,10 @@ const closeOrder =async () => {
         alert("created order failed, please try again!!")
     else {
         const data = await res.json()
-        alert(`order ${data.UseId} registered successfully`)
+        alert(`order ${data.OrderId} created successfully`)
     }
      }
    catch (e) {
-        alert(e.massage)
+        alert("error")
   }
 }

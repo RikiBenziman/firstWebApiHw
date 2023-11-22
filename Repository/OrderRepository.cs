@@ -17,11 +17,9 @@ namespace Repositories
         }
         public async Task<Order> creatOrder(Order newOrder)
         {
-            await _mySuperMarketContext.AddAsync(newOrder);
+            await _mySuperMarketContext.Orders.AddAsync(newOrder);
             await _mySuperMarketContext.SaveChangesAsync();
             return newOrder;
-
-
         }
     }
 }
