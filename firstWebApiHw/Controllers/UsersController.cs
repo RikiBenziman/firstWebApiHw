@@ -23,15 +23,15 @@ namespace firstWebApiHw.Controllers
             _userService = userService;
             _mapper = mapper;
         }
-        [Route("UserNameAndPassword")]
-        // GET: api/<user>
+        [Route("login")]
+        // GET: api/<user>//=======login;
         [HttpPost]
-        public async Task<ActionResult<UserIdDto>> Post([FromBody] UserNameAndPassword userNameAndPassword )
+        public async Task<ActionResult<UserIdNameDto>> Post([FromBody] UserLoginDto userLoginDto)
         {
             try
             {
-            User user = await _userService.getUserByUserNameAndPassword(userNameAndPassword.UserName, userNameAndPassword.Password);
-                UserIdDto UserIdDto = _mapper.Map<User, UserIdDto>(user);
+                User user = await _userService.getUserByUserNameAndPassword(userLoginDto.UserName, userLoginDto.Password);
+                UserIdNameDto UserIdDto = _mapper.Map<User, UserIdNameDto>(user);
                 return user != null ? Ok(UserIdDto) : Unauthorized();
             }
              catch (Exception ex)
@@ -41,9 +41,9 @@ namespace firstWebApiHw.Controllers
         }
 
        
-        // POST api/<user>
+        // POST api/<user>//=======register;
         [HttpPost]
-        public async  Task<ActionResult<User>> Post([FromBody] UserDto userDto)
+        public async  Task<ActionResult<UserIdNameDto>> Post([FromBody] UserDto userDto)
         {
             try
             {
@@ -58,16 +58,16 @@ namespace firstWebApiHw.Controllers
             }
         }
 
-        // PUT api/<user>/5
+        // PUT api/<user>/5 //=======update;
         [HttpPut("{id}")]
-        public async Task<ActionResult<UserIdDto>> Put(int id, [FromBody] UserDto userToUpdate)
+        public async Task<ActionResult<UserIdNameDto>> Put(int id, [FromBody] UserDto userToUpdateDto)
         {
             try
             {
-                User UserToUpdateDto = _mapper.Map<UserDto, User>(userToUpdate);
-                User updateUser = await _userService.update(id, UserToUpdateDto);
-                UserIdDto UpdateUserId = _mapper.Map<User, UserIdDto>(updateUser);
-                return UpdateUserId != null ? Ok(UpdateUserId) : BadRequest("user didnt found");
+                User userToUpdate = _mapper.Map<UserDto, User>(userToUpdateDto);
+                User updateUser = await _userService.update(id, userToUpdate);
+                UserIdNameDto userIdNameDto = _mapper.Map<User, UserIdNameDto>(updateUser);
+                return userIdNameDto != null ? Ok(userIdNameDto) : BadRequest("user didnt found");
             }
             catch (Exception ex)
             {
@@ -75,14 +75,15 @@ namespace firstWebApiHw.Controllers
             }
 
         }
-        //GETuserById api/<user>/5
+        //GETuserById api/<user>/5 //=======getUserById
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get( int id)
+        public async Task<ActionResult<UserIdNameDto>> Get( int id)
         {
             try
             {
                 User user = await _userService.getUserById(id);
-                return user != null ?  Ok(user) :  BadRequest("user didnt found");               
+                UserIdNameDto userIdNameDto = _mapper.Map<User, UserIdNameDto>(user);
+                return user != null ?  Ok(userIdNameDto) :  BadRequest("user didnt found");               
             }
             catch (Exception ex)
             {
@@ -91,7 +92,7 @@ namespace firstWebApiHw.Controllers
         }
 
         [Route("password")]
-        [HttpPost]
+        [HttpPost]  //=======checkSrengthPassword;
         public ActionResult<int> Post([FromBody] string password)
         {
             var result = _userService.checkPassword(password);

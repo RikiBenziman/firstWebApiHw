@@ -12,27 +12,26 @@ const register = async() =>{
 }
     
     try {
-    const progress = document.getElementById("progress").value;
+        const progress = document.getElementById("progress").value;
         if (progress < 2)
             alert("Easy password,please change your password")
-        else { 
-        const res = await fetch('api/Users',
-            {
-                method: 'POST',
-                headers: {'Content-Type':'application/json' },
-                body: JSON.stringify(user)
+        else {
+            const res = await fetch('api/Users',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(user)
 
-            })
-        if (!res.ok)
-            alert("Registeration failed, please try again!!")
-        else 
-        {
-            const data = await res.json()
-            alert(`user ${data.userName} registered successfully`)
+                })
+            if (!res.ok)
+                alert("Registeration failed, please try again!!")
+            else {
+                const data = await res.json()
+                alert(`user ${data.userName} registered successfully`)
+
             }
         }
     }
-
     catch (e)
     {
         alert(e.massage)
@@ -46,7 +45,7 @@ const login = async () => {
             UserName: document.getElementById("userName1").value,
             Password: document.getElementById("password1").value
         }
-        const res = await fetch('api/Users/UserNameAndPassword',
+        const res = await fetch('api/Users/login',
             {
                 method: "POST",
                 headers: { 'Content-type': 'application/json' },
@@ -62,9 +61,6 @@ const login = async () => {
     } catch (e) {
         alert(e)
     }
-
-
-
 }
 const update = async () => {
     const user = {
@@ -100,9 +96,6 @@ const update = async () => {
     } catch (e) {
       alert(e)
     }
-
-
-
 }
 async function strengthPassword() {
     const password = document.getElementById("password").value
@@ -121,7 +114,7 @@ async function strengthPassword() {
     else
     {
         const result = await res.json()
-            progress.value = result;
+        progress.value = result;
     }
  }
     catch (e) {
@@ -129,10 +122,10 @@ async function strengthPassword() {
     }
 } 
 const displayUserName = () => { 
-    const hello = document.createElement('p')
+const hello = document.createElement('p')
 hello.id="hello"
 document.body.appendChild(hello)
 const userJson = sessionStorage.getItem("user")
 const firstName=JSON.parse(userJson).firstName
-    hello.innerText = `wellcom to ${firstName}`
+hello.innerText = `wellcom to ${firstName}`
 }

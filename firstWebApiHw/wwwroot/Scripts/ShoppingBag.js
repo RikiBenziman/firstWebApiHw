@@ -40,12 +40,12 @@ const AddtProduct = (product) => {
     showBag();
 }
 
-const closeOrder =async () => {
-    if (!sessionStorage.getItem("user")) {
+
+const closeOrder = async () => {
+    if (!sessionStorage.getItem("user"))
         document.querySelector(".setUser").href = "/Login.html";
-    }
-    else {
-        let MyCard =JSON.parse( sessionStorage.getItem("MyCard"));
+    try {
+        let MyCard = JSON.parse(sessionStorage.getItem("MyCard"));
         let totalSum = 0;
         const order = {
             OderDate: new Date(),
@@ -65,23 +65,21 @@ const closeOrder =async () => {
             MyCard = MyCard.filter(p => p.productId != prod.productId);
         }
         order.OrderSum = totalSum;
-    }
-  try {
-      const res = await fetch("https://localhost:44354/api/Orders" ,
-          {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(order)
+        const res = await fetch("https://localhost:44354/api/Orders",
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(order)
 
-          });
-    if (!res.ok)
-        alert("created order failed, please try again!!")
-    else {
-        const data = await res.json()
-        alert(`order ${data.OrderId} created successfully`)
+            });
+        if (!res.ok)
+            alert("created order failed, please try again!!")
+        else {
+            const data = await res.json()
+            alert(`order ${data.OrderId} created successfully`)
+        }
     }
-     }
-   catch (e) {
+    catch (e) {
         alert("error")
-  }
+    }
 }

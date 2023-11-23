@@ -15,5 +15,6 @@ namespace DTO
         public decimal OrderSum { get; set; }
 
         public int UserId { get; set; }
+        public virtual ICollection<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
     }
 }

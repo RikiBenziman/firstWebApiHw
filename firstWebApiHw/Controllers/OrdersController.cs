@@ -4,7 +4,6 @@ using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace webApiShopSite.Controllers
 {
@@ -20,12 +19,11 @@ namespace webApiShopSite.Controllers
             _orderService = orderService;
             _mapper = mapper;
         }
-        [HttpPost]
+        [HttpPost]  //=======creatOrder;
         public async Task<ActionResult<OrderDto>> Post([FromBody] OrderDto orderDto)
         {
             try
             {
-                
                 Order Order = _mapper.Map< OrderDto,Order>(orderDto);
                 Order newOrder = await _orderService.creatOrder(Order);
                 return newOrder != null ? CreatedAtAction(nameof(Get), new { id = orderDto.UserId }, orderDto) : NoContent();
@@ -38,7 +36,7 @@ namespace webApiShopSite.Controllers
         [HttpGet("{id}")]
         private string Get(int id)
         {
-            return "value";
+            return " ";
         }
     }
 }

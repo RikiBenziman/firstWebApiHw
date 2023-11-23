@@ -13,7 +13,7 @@ namespace webApiShopSite
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<Product, ProductDto>();
             CreateMap<OrderItem, OrderItemDto>().ReverseMap();
-            CreateMap<User, UserIdDto>();
+            CreateMap<User, UserIdNameDto>();
         }
 
     }
