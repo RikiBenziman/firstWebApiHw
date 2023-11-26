@@ -4,7 +4,7 @@ using Repositories;
 using Repository;
 using Service;
 using Services;
-using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -33,6 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 
