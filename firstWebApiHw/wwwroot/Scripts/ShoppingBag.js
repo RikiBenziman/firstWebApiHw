@@ -80,6 +80,6 @@ const closeOrder = async () => {
         }
     }
     catch (e) {
-        alert("error")//add comment
+        alert("error")//add important comment!!!
     }
 }
