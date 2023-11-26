@@ -52,7 +52,7 @@ public partial class MySuperMarketContext : DbContext
 
             entity.Property(e => e.OrderId).HasColumnName("ORDER_ID");
             entity.Property(e => e.OderDate)
-                .HasColumnType("date")
+                .HasPrecision(0)
                 .HasColumnName("ODER_DATE");
             entity.Property(e => e.OrderSum)
                 .HasColumnType("money")

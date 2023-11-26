@@ -26,17 +26,19 @@ namespace webApiShopSite.Controllers
             {
                 Order Order = _mapper.Map< OrderDto,Order>(orderDto);
                 Order newOrder = await _orderService.creatOrder(Order);
-                return newOrder != null ? CreatedAtAction(nameof(Get), new { id = orderDto.UserId }, orderDto) : NoContent();
+                OrderDto newOrderDto = _mapper.Map<Order, OrderDto>(newOrder);
+                return newOrder != null ? CreatedAtAction(nameof(Get), new {id=newOrderDto.OrderId},newOrderDto) : NoContent();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+       
         [HttpGet("{id}")]
-        private string Get(int id)
+        public string Get(int id)
         {
-            return " ";
+            return "value";
         }
     }
 }

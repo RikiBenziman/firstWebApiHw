@@ -55,17 +55,17 @@ const closeOrder = async () => {
         };
         while (MyCard.length != 0) {
             let prod = MyCard[0];
-            let count = MyCard.filter(p => p.productId == prod.productId);
+            let count = MyCard.filter(p => p.productId == prod.productId).length;
             let orderItem = {
                 Quantity: count,
                 ProductId: prod.productId
             };
             order.OrderItems = [...order.OrderItems, orderItem];
-            totalSum += prod.productPrice * count.length;
+            totalSum += prod.productPrice * count;
             MyCard = MyCard.filter(p => p.productId != prod.productId);
         }
         order.OrderSum = totalSum;
-        const res = await fetch("https://localhost:44354/api/Orders",
+        const res = await fetch('https://localhost:44354/api/Orders',
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -76,7 +76,7 @@ const closeOrder = async () => {
             alert("created order failed, please try again!!")
         else {
             const data = await res.json()
-            alert(`order ${data.OrderId} created successfully`)
+            alert(`order ${data.orderId} created successfully`)
         }
     }
     catch (e) {
