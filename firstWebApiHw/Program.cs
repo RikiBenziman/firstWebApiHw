@@ -4,7 +4,7 @@ using Repositories;
 using Repository;
 using Service;
 using Services;
-
+using Microsoft.Extensions.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,7 +17,8 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 
-builder.Services.AddDbContext<MySuperMarketContext>(option => option.UseSqlServer("Data Source=SRV2\\PUPILS;Initial Catalog=MySuperMarket;Integrated Security=True"));
+
+builder.Services.AddDbContext<MySuperMarketContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MySchool")));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddEndpointsApiExplorer();
