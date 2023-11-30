@@ -44,7 +44,7 @@ const AddtProduct = (product) => {
 const closeOrder = async () => {
     if (!sessionStorage.getItem("user"))
         document.querySelector(".setUser").href = "/Login.html";
-    try {
+    
         let MyCard = JSON.parse(sessionStorage.getItem("MyCard"));
         let totalSum = 0;
         const order = {
@@ -64,7 +64,8 @@ const closeOrder = async () => {
             totalSum += prod.productPrice * count;
             MyCard = MyCard.filter(p => p.productId != prod.productId);
         }
-        order.OrderSum = totalSum;
+    order.OrderSum = totalSum;
+    try {
         const res = await fetch('https://localhost:44354/api/Orders',
             {
                 method: 'POST',
@@ -80,6 +81,6 @@ const closeOrder = async () => {
         }
     }
     catch (e) {
-        alert("error")
+        alert("error to creat order please try again!")
     }
 }

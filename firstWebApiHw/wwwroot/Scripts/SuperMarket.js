@@ -89,7 +89,7 @@ const filterProducts = async () => {
 
 const addToCard = (product) => {
     document.getElementById("ItemsCountText").innerText++;
-    if (sessionStorage.length == 0) sessionStorage.setItem("MyCard", "[]");
+    if (sessionStorage.MyCard == undefined) sessionStorage.setItem("MyCard", "[]");
     let card = JSON.parse(sessionStorage.getItem("MyCard"));
     myCard = [...card, product];
     let MyCard = JSON.stringify(myCard);

@@ -23,9 +23,20 @@ namespace Repositories
             && (minPrice == null ? (true) : (product.ProductPrice >= minPrice))
             && (maxPrice == null ? (true) : (product.ProductPrice <= maxPrice))
             && ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
+            .Include(i => i.Category)
             .OrderBy(product => product.ProductPrice);
+            
+            List<Product> products = await query.ToListAsync();
+           
+            return products;
+        }
+
+        public async Task<List<Product>> getProductById( int[] productIds)
+        {
+            var query = _MySuperMarketContext.Products.Where(p => productIds.Contains(p.ProductId));
             List<Product> products = await query.ToListAsync();
             return products;
+
         }
     }
 }

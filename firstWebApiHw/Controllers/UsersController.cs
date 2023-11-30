@@ -17,11 +17,13 @@ namespace firstWebApiHw.Controllers
     {
         IUserService _userService;
         IMapper _mapper;
+        ILogger<UsersController> _logger;
 
-        public UsersController(IUserService userService,IMapper mapper)
+        public UsersController(IUserService userService,IMapper mapper, ILogger<UsersController> logger)
         {
             _userService = userService;
             _mapper = mapper;
+            _logger = logger;
         }
         [Route("login")]
         // GET: api/<user>//=======login;
@@ -30,12 +32,15 @@ namespace firstWebApiHw.Controllers
         {
             try
             {
+                User userLogin = _mapper.Map<UserLoginDto, User>(userLoginDto);
                 User user = await _userService.getUserByUserNameAndPassword(userLoginDto.UserName, userLoginDto.Password);
                 UserIdNameDto UserIdDto = _mapper.Map<User, UserIdNameDto>(user);
+                _logger.LogInformation("Login to user {0} and password {1}", userLoginDto.UserName, userLoginDto.Password);
                 return user != null ? Ok(UserIdDto) : Unauthorized();
             }
              catch (Exception ex)
             {
+                _logger.LogError("errror ", ex);
                 throw new Exception(ex.Message);
             }
         }
