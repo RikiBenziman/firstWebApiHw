@@ -11,8 +11,8 @@ namespace webApiShopSite
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<Product, ProductDto>().ReverseMap()
-                .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.CategoryName));
+            CreateMap<Product, ProductDto>()
+                .ForMember(dest => dest.CategoryName, opts => opts.MapFrom(src => src.Category.CategoryName)).ReverseMap();
             CreateMap<OrderItem, OrderItemDto>().ReverseMap();
             CreateMap<User, UserIdNameDto>().ReverseMap();
             CreateMap<User, UserLoginDto>().ReverseMap();
