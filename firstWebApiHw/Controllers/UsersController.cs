@@ -84,16 +84,9 @@ namespace firstWebApiHw.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserIdNameDto>> Get( int id)
         {
-            try
-            {
                 User user = await _userService.getUserById(id);
                 UserIdNameDto userIdNameDto = _mapper.Map<User, UserIdNameDto>(user);
                 return user != null ?  Ok(userIdNameDto) :  BadRequest("user didnt found");               
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
 
         [Route("password")]

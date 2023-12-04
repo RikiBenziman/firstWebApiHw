@@ -23,6 +23,8 @@ public partial class MySuperMarketContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<Rating> Ratings { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -111,6 +113,30 @@ public partial class MySuperMarketContext : DbContext
                 .HasForeignKey(d => d.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Products__Catego__2A4B4B5E");
+        });
+
+        modelBuilder.Entity<Rating>(entity =>
+        {
+            entity.ToTable("RATING");
+
+            entity.Property(e => e.RatingId).HasColumnName("RATING_ID");
+            entity.Property(e => e.Host)
+                .HasMaxLength(50)
+                .HasColumnName("HOST");
+            entity.Property(e => e.Method)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("METHOD");
+            entity.Property(e => e.Path)
+                .HasMaxLength(50)
+                .HasColumnName("PATH");
+            entity.Property(e => e.RecordDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Record_Date");
+            entity.Property(e => e.Referer)
+                .HasMaxLength(100)
+                .HasColumnName("REFERER");
+            entity.Property(e => e.UserAgent).HasColumnName("USER_AGENT");
         });
 
         modelBuilder.Entity<User>(entity =>

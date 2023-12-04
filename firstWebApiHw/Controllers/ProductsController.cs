@@ -27,16 +27,9 @@ namespace webApiShopSite.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductDto>> GetAllProduct(string? desc, int? minPrice, int? maxPrice,[FromQuery] int?[] categoryIds)
         {
-            try
-            {
                 IEnumerable<Product> products = await _productService.getAllProduct(desc, minPrice, maxPrice, categoryIds);
                 IEnumerable<ProductDto> productsDto = _mapper.Map< IEnumerable<Product>, IEnumerable< ProductDto> >(products);
                 return productsDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
      }
 }
