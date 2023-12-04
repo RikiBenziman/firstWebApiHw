@@ -21,5 +21,9 @@ namespace Repositories
             await _mySuperMarketContext.SaveChangesAsync();
             return newOrder;
         }
+        public async Task<Order> getOrderById(int id)
+        {
+            return await _mySuperMarketContext.Orders.FindAsync(id);
+;        }
     }
 }

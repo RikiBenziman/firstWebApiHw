@@ -28,6 +28,7 @@ namespace Repository
 
         public async Task<User> update(int id, User userToUpdate)
         {
+            userToUpdate.UserId=id;
             _MySuperMarketContext.Users.Update(userToUpdate);
             _MySuperMarketContext.SaveChangesAsync();
             return userToUpdate;

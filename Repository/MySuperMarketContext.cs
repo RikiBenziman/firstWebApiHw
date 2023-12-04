@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Entities;
 
 public partial class MySuperMarketContext : DbContext
 {
-    public IConfiguration _configuration { get; }
     public MySuperMarketContext()
     {
     }
 
-    public MySuperMarketContext(DbContextOptions<MySuperMarketContext> options,IConfiguration configuration)
+    public MySuperMarketContext(DbContextOptions<MySuperMarketContext> options)
         : base(options)
     {
-        _configuration = configuration;
     }
 
     public virtual DbSet<Category> Categories { get; set; }
@@ -29,12 +26,11 @@ public partial class MySuperMarketContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer(_configuration.GetConnectionString("MySchool"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=srv2\\pupils;Database=MySuperMarket;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    { 
-       
+    {
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.CategoryId).HasName("PK_Table_1");
@@ -58,9 +54,7 @@ public partial class MySuperMarketContext : DbContext
             entity.Property(e => e.OderDate)
                 .HasPrecision(0)
                 .HasColumnName("ODER_DATE");
-            entity.Property(e => e.OrderSum)
-                .HasColumnType("money")
-                .HasColumnName("ORDER_SUM");
+            entity.Property(e => e.OrderSum).HasColumnName("ORDER_SUM");
             entity.Property(e => e.UserId).HasColumnName("USER_ID");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)

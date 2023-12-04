@@ -35,9 +35,18 @@ namespace webApiShopSite.Controllers
         }
        
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<OrderDto>> Get(int id)
         {
-            return "value";
+            try
+            {
+                Order order = await _orderService.getOrderById(id);
+                OrderDto orderDto = _mapper.Map<Order, OrderDto>(order);
+                return order != null ? Ok(orderDto) : BadRequest("user didnt found");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

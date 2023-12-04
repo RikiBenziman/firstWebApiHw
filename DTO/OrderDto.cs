@@ -12,7 +12,7 @@ namespace DTO
 
         public DateTime OderDate { get; set; }
 
-        public decimal OrderSum { get; set; }
+        public double OrderSum { get; set; }
 
         public int UserId { get; set; }
         public virtual ICollection<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
