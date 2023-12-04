@@ -11,11 +11,11 @@ namespace webApiShopSite.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CtegoriesController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         ICategoryService _categoryService;
         IMapper _mapper;
-        public CtegoriesController(ICategoryService categoryService,IMapper mapper)
+        public CategoriesController(ICategoryService categoryService,IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;

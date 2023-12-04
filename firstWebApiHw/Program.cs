@@ -5,6 +5,8 @@ using Repository;
 using Service;
 using Services;
 using NLog.Web;
+using PresidentsApp.Middlewares;
+using webApiShopSite.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IRatingRepository, RatingRepository>();   
+builder.Services.AddTransient<IRatingService, RatingService>();
 
 
 builder.Services.AddDbContext<MySuperMarketContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MySchool")));
@@ -37,12 +41,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseAuthorization();
+
+
+////add midellware;
+app.UseErrorHandlingMiddleware();
+app.UseRatingMiddleware();
+
 
 app.MapControllers();
 
