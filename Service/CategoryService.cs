@@ -17,9 +17,9 @@ namespace Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<List<Category>> GetAllCategory()
+        public async Task<List<Category>> GetAllCategoryAsync()
         {
-            List<Category> categories = await _categoryRepository.GetAllCategories();
+            List<Category> categories = await _categoryRepository.GetAllCategoriesAsync();
             return categories != null ? categories : null;
         }
     }

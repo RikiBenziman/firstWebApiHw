@@ -14,24 +14,24 @@ using Repository;
             _userRepository = userRepository;
         }
 
-        public async Task<User> getUserByUserNameAndPassword(string UserName, string Password)
+        public async Task<User> getUserByUserNameAndPasswordAsync(string UserName, string Password)
         {
-            User newUser = await _userRepository.getUserByUserNameAndPassword(UserName, Password);
+            User newUser = await _userRepository.getUserByUserNameAndPasswordAsync(UserName, Password);
             return newUser != null?  newUser:null;
         }
-        public async Task<User> createNewUser(User user)
+        public async Task<User> createNewUserAsync(User user)
         {
             if (checkPassword(user.Password) < 2)
                 return null;
-            User newUser = await _userRepository.createNewUser(user);
+            User newUser = await _userRepository.createNewUserAsync(user);
             return newUser != null ? newUser : null;
         }
 
-        public async Task<User> update(int id, User userToUpdate)
+        public async Task<User> updateAsync(int id, User userToUpdate)
         {
             if (checkPassword(userToUpdate.Password) < 2)
                 return null;
-            await _userRepository.update(id, userToUpdate);
+            await _userRepository.updateAsync(id, userToUpdate);
             return userToUpdate;
         }
 
@@ -40,9 +40,9 @@ using Repository;
             var result = Zxcvbn.Core.EvaluatePassword(password);
             return result.Score;
         }
-        public async Task<User> getUserById(int id)
+        public async Task<User> getUserByIdAsync(int id)
         {
-            User newUser = await _userRepository.getUserById(id);
+            User newUser = await _userRepository.getUserByIdAsync(id);
             return newUser != null ? newUser : null;
         }
     }

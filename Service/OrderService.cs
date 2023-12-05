@@ -22,14 +22,14 @@ namespace Services
             _logger = logger;
 
         }
-        public async Task<Order> creatOrder(Order order)
+        public async Task<Order> creatOrderAsync(Order order)
         {
             int[] productsId = new int[order.OrderItems.Count];
             for (int i = 0; i< order.OrderItems.Count; i++)
             {
                 productsId[i] = order.OrderItems.ElementAt(i).ProductId;
             }
-            List<Product> product = await _productRepository.getProductById(productsId);
+            List<Product> product = await _productRepository.getProductByIdAsync(productsId);
             double? orderSum = 0;
             for (int i = 0; i < order.OrderItems.Count; i++)
             {
@@ -41,15 +41,15 @@ namespace Services
                 return null;
             }
 
-            Order newOrder = await _orderRepository.creatOrder(order);
+            Order newOrder = await _orderRepository.creatOrderAsync(order);
             return newOrder != null ? newOrder : null;
 
         }
 
     
-    public async Task<Order> getOrderById(int id)
+    public async Task<Order> getOrderByIdAsync(int id)
     {
-        Order newOrder = await _orderRepository.getOrderById(id);
+        Order newOrder = await _orderRepository.getOrderByIdAsync(id);
         return newOrder != null ? newOrder : null;
     }
 }

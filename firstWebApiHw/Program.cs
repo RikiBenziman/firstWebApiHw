@@ -34,7 +34,13 @@ builder.Services.AddControllers();
 
 builder.Host.UseNLog();
 
+
 var app = builder.Build();
+
+////add midellware;
+app.UseErrorHandlingMiddleware();
+app.UseRatingMiddleware();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -50,9 +56,7 @@ app.UseStaticFiles();
 app.UseAuthorization();
 
 
-////add midellware;
-app.UseErrorHandlingMiddleware();
-app.UseRatingMiddleware();
+
 
 
 app.MapControllers();

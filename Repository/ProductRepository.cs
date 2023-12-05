@@ -1,10 +1,5 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories
 {
@@ -16,7 +11,7 @@ namespace Repositories
             _MySuperMarketContext = _mySuperMarketContext;
         }
 
-        public async Task<List<Product>> getAllProduct(string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
+        public async Task<List<Product>> getAllProductAsync(string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
         {
             var query = _MySuperMarketContext.Products.Where(product =>
             (desc == null ? (true) : (product.ProductDescription.Contains(desc)))
@@ -31,7 +26,7 @@ namespace Repositories
             return products;
         }
 
-        public async Task<List<Product>> getProductById( int[] productIds)
+        public async Task<List<Product>> getProductByIdAsync( int[] productIds)
         {
             var query = _MySuperMarketContext.Products.Where(p => productIds.Contains(p.ProductId));
             List<Product> products = await query.ToListAsync();

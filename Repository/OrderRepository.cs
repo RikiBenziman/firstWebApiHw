@@ -1,9 +1,4 @@
 ﻿using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories
 {
@@ -11,19 +6,23 @@ namespace Repositories
     {
         MySuperMarketContext _mySuperMarketContext;
 
+
         public OrderRepository(MySuperMarketContext mySuperMarketContext)
         {
+
             _mySuperMarketContext = mySuperMarketContext;
         }
-        public async Task<Order> creatOrder(Order newOrder)
+        public async Task<Order> creatOrderAsync(Order newOrder)
         {
             await _mySuperMarketContext.Orders.AddAsync(newOrder);
             await _mySuperMarketContext.SaveChangesAsync();
             return newOrder;
+            
         }
-        public async Task<Order> getOrderById(int id)
+        public async Task<Order> getOrderByIdAsync(int id)
         {
             return await _mySuperMarketContext.Orders.FindAsync(id);
-;        }
+        }
     }
 }
+

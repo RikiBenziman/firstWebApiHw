@@ -16,7 +16,7 @@ const register = async() =>{
         if (progress < 2)
             alert("Easy password,please change your password")
         else {
-            const res = await fetch('api/Users',
+            const res = await fetch('https://localhost:44354/api/Users',
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },

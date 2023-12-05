@@ -16,9 +16,9 @@ namespace Services
         {
             _ratingRepository = ratingRepository;
         }
-        public async Task creatRating(Rating rating)
+        public async Task creatRatingAsync(Rating rating)
         {
-            await _ratingRepository.creatRating(rating);
+            await _ratingRepository.creatRatingAsync(rating);
         }
     }
 }

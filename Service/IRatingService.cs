@@ -4,6 +4,6 @@ namespace Services
 {
     public interface IRatingService
     {
-        Task creatRating(Rating rating);
+        Task creatRatingAsync(Rating rating);
     }
 }

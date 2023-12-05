@@ -24,7 +24,7 @@ namespace webApiShopSite.Controllers
             try
             {
                 Order Order = _mapper.Map< OrderDto,Order>(orderDto);
-                Order newOrder = await _orderService.creatOrder(Order);
+                Order newOrder = await _orderService.creatOrderAsync(Order);
                 OrderDto newOrderDto = _mapper.Map<Order, OrderDto>(newOrder);
                 return newOrder != null ? CreatedAtAction(nameof(Get), new {id=newOrderDto.OrderId},newOrderDto) : NoContent();
             }
@@ -37,7 +37,7 @@ namespace webApiShopSite.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderDto>> Get(int id)
         {
-                Order order = await _orderService.getOrderById(id);
+                Order order = await _orderService.getOrderByIdAsync(id);
                 OrderDto orderDto = _mapper.Map<Order, OrderDto>(order);
                 return order != null ? Ok(orderDto) : BadRequest("user didnt found");
         }

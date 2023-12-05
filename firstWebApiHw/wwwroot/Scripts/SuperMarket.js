@@ -27,8 +27,6 @@ const getAllProducts = async (desc, minPrice, maxPrice, categoryIds) => {
 const showProducts = async () => {
     const products = await getAllProducts();
     for (let i = 0; i < products.length; i++) {
-        let count = products.length;
-        document.getElementById("counter").innerText = count;            ;
         var tmpProd = document.getElementById("temp-card");
         var cln = tmpProd.content.cloneNode(true);
         cln.querySelector("img").src = "./images/" + products[i].productImage;
@@ -38,11 +36,13 @@ const showProducts = async () => {
         cln.querySelector("button").addEventListener('click', () => { addToCard(products[i]) })     
         document.getElementById("PoductList").appendChild(cln);
     }
-    document.getElementById("ItemsCountText").innerText = (JSON.parse(sessionStorage.getItem("MyCard"))).length;
+    document.getElementById("counter").innerText = products.length;
+    if (sessionStorage.MyCard != undefined) 
+        document.getElementById("ItemsCountText").innerText = (JSON.parse(sessionStorage.getItem("MyCard"))).length;  
 }
 const getAllCartegories = async () => {
     try {
-        const res = await fetch("https://localhost:44354/api/Ctegories")
+        const res = await fetch("https://localhost:44354/api/Categories")
         const Categories = await res.json();
         return Categories;
     }

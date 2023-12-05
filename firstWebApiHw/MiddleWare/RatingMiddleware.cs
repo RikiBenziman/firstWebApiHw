@@ -36,7 +36,7 @@ namespace webApiShopSite.MiddleWare
             //•	REFERER - הדף ממנו התבצעה הפניה
             //•	USER_AGENT - מכיל את שם הדפדפן, גירסתו, מערכת ההפעלה ושפתה
             //•	RECORD_DATE -תאריך הרישום לרייטינג
-            _ratingService.creatRating(rating); 
+            _ratingService.creatRatingAsync(rating); 
             return _next(httpContext);
         }
     }

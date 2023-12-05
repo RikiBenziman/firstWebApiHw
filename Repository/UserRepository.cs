@@ -14,26 +14,26 @@ namespace Repository
         }
 
         string url = "../myUsers.txt";
-        public async Task<User> getUserByUserNameAndPassword(string userName, string password)
+        public async Task<User> getUserByUserNameAndPasswordAsync(string userName, string password)
         {
             return await _MySuperMarketContext.Users.Where(User => User.UserName == userName && User.Password == password).FirstOrDefaultAsync();
         }
 
-        public async Task<User> createNewUser(User user)
+        public async Task<User> createNewUserAsync(User user)
         {
             await _MySuperMarketContext.Users.AddAsync(user);
             _MySuperMarketContext.SaveChangesAsync();
             return user;
         }
 
-        public async Task<User> update(int id, User userToUpdate)
+        public async Task<User> updateAsync(int id, User userToUpdate)
         {
             userToUpdate.UserId=id;
             _MySuperMarketContext.Users.Update(userToUpdate);
             _MySuperMarketContext.SaveChangesAsync();
             return userToUpdate;
         }
-       public async Task<User> getUserById(int id)
+       public async Task<User> getUserByIdAsync(int id)
         {
             return await _MySuperMarketContext.Users.Where(User => User.UserId == id).FirstOrDefaultAsync();
         }
