@@ -30,19 +30,11 @@ namespace firstWebApiHw.Controllers
         [HttpPost]
         public async Task<ActionResult<UserIdNameDto>> Get([FromBody] UserLoginDto userLoginDto)
         {
-            try
-            {
                 User userLogin = _mapper.Map<UserLoginDto, User>(userLoginDto);
                 User user = await _userService.getUserByUserNameAndPasswordAsync(userLoginDto.UserName, userLoginDto.Password);
                 UserIdNameDto UserIdDto = _mapper.Map<User, UserIdNameDto>(user);
                 _logger.LogInformation("Login to user {0} and password {1}", userLoginDto.UserName, userLoginDto.Password);
                 return user != null ? Ok(UserIdDto) : Unauthorized();
-            }
-             catch (Exception ex)
-            {
-                _logger.LogError("errror ", ex);
-                throw new Exception(ex.Message);
-            }
         }
 
        
@@ -50,34 +42,23 @@ namespace firstWebApiHw.Controllers
         [HttpPost]
         public async  Task<ActionResult<UserIdNameDto>> Post([FromBody] UserDto userDto)
         {
-            try
-            {
+            
                 User user = _mapper.Map<UserDto,User>(userDto);
                 User newUser = await _userService.createNewUserAsync(user);
                 return newUser != null ?CreatedAtAction(nameof(Get), new { id = userDto.UserId }, userDto) : BadRequest();
-            }
-            catch (Exception ex)
-            {
-
-               throw new Exception(ex.Message);
-            }
+           
         }
 
         // PUT api/<user>/5 //=======update;
         [HttpPut("{id}")]
         public async Task<ActionResult<UserIdNameDto>> Put(int id, [FromBody] UserDto userToUpdateDto)
         {
-            try
-            {
+           
                 User userToUpdate = _mapper.Map<UserDto, User>(userToUpdateDto);
                 User updateUser = await _userService.updateAsync(id, userToUpdate);
                 UserIdNameDto userIdNameDto = _mapper.Map<User, UserIdNameDto>(updateUser);
                 return userIdNameDto != null ? Ok(userIdNameDto) : BadRequest("user didnt found");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+         
 
         }
         //GETuserById api/<user>/5 //=======getUserById

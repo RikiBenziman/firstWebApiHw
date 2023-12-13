@@ -21,17 +21,11 @@ namespace webApiShopSite.Controllers
         [HttpPost]  //=======creatOrder;
         public async Task<ActionResult<OrderDto>> Post([FromBody] OrderDto orderDto)
         {
-            try
-            {
                 Order Order = _mapper.Map< OrderDto,Order>(orderDto);
                 Order newOrder = await _orderService.creatOrderAsync(Order);
                 OrderDto newOrderDto = _mapper.Map<Order, OrderDto>(newOrder);
                 return newOrder != null ? CreatedAtAction(nameof(Get), new {id=newOrderDto.OrderId},newOrderDto) : NoContent();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+         
         }
        
         [HttpGet("{id}")]

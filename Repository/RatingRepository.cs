@@ -32,7 +32,7 @@ namespace Repositories
             Record_Date = rating.RecordDate;
             string query = "insert into RATING(HOST,METHOD,PATH,REFERER,USER_AGENT,Record_Date)" +
             "Values(@HOST,@METHOD,@PATH,@REFERER,@USER_AGENT,@Record_Date)";
-            using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("MySchool")))
+            using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("MyHome")))
             using (SqlCommand cmd = new SqlCommand(query, cn))
             {
                 cmd.Parameters.Add("@HOST", SqlDbType.NVarChar, 50).Value = HOST;

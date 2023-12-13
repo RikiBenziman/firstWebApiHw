@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Entities;
 
 public partial class MySuperMarketContext : DbContext
 {
+    public IConfiguration _configuration { get; }
     public MySuperMarketContext()
     {
     }
 
-    public MySuperMarketContext(DbContextOptions<MySuperMarketContext> options)
+    public MySuperMarketContext(DbContextOptions<MySuperMarketContext> options, IConfiguration configuration)
         : base(options)
     {
+        _configuration = configuration;
     }
 
     public virtual DbSet<Category> Categories { get; set; }
@@ -29,7 +32,7 @@ public partial class MySuperMarketContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=srv2\\pupils;Database=MySuperMarket;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer(_configuration.GetConnectionString("MyHome"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -48,26 +51,26 @@ public partial class MySuperMarketContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__ORDERS__460A9464743A689A");
+            entity.HasKey(e => e.OrderId).HasName("PK__ORDERS__460A9464A368BA4E");
 
             entity.ToTable("ORDERS");
 
             entity.Property(e => e.OrderId).HasColumnName("ORDER_ID");
-            entity.Property(e => e.OderDate)
+            entity.Property(e => e.OrderDate)
                 .HasPrecision(0)
-                .HasColumnName("ODER_DATE");
+                .HasColumnName("ORDER_DATE");
             entity.Property(e => e.OrderSum).HasColumnName("ORDER_SUM");
             entity.Property(e => e.UserId).HasColumnName("USER_ID");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ORDERS__USER_ID__3C69FB99");
+                .HasConstraintName("FK_ORDERS_USERS");
         });
 
         modelBuilder.Entity<OrderItem>(entity =>
         {
-            entity.HasKey(e => e.OrderItemId).HasName("PK__ORDERS_I__E15C43169EAB1E53");
+            entity.HasKey(e => e.OrderItemId).HasName("PK__ORDER_IT__E15C43160AAEDD73");
 
             entity.ToTable("ORDER_ITEM");
 
@@ -79,17 +82,17 @@ public partial class MySuperMarketContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ORDERS_IT__ORDER__403A8C7D");
+                .HasConstraintName("FK_ORDER_ITEM_ORDERS1");
 
             entity.HasOne(d => d.Product).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ORDERS_IT__PRODU__3F466844");
+                .HasConstraintName("FK_ORDER_ITEM_PRODUCTS");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__3214EC07A10199C3");
+            entity.HasKey(e => e.ProductId).HasName("PK__PRODUCTS__52B41763B3494B28");
 
             entity.ToTable("PRODUCTS");
 
@@ -112,7 +115,7 @@ public partial class MySuperMarketContext : DbContext
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Products__Catego__2A4B4B5E");
+                .HasConstraintName("FK__PRODUCTS__CATEGO__440B1D61");
         });
 
         modelBuilder.Entity<Rating>(entity =>
@@ -159,7 +162,7 @@ public partial class MySuperMarketContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("PASSWORD");
             entity.Property(e => e.UserName)
-                .HasMaxLength(20)
+                .HasMaxLength(30)
                 .IsUnicode(false)
                 .HasColumnName("USER_NAME");
         });
