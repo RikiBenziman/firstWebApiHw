@@ -48,10 +48,7 @@ p.description {
 .bar::before {
     content: ' MY SUPER MARKET';
     color: white;
-    /* display: inline-block; */
     position: absolute;
-    /* margin: 0 auto; */
-    /* display: block; */
     top: 8px;
     left: 51%;
     font-family: Helvetica;

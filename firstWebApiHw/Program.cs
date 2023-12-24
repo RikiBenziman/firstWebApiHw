@@ -1,8 +1,6 @@
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
-using Repository;
-using Service;
 using Services;
 using NLog.Web;
 using PresidentsApp.Middlewares;
@@ -54,10 +52,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseAuthorization();
-
-
-
-
 
 app.MapControllers();
 

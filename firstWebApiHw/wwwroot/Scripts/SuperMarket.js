@@ -27,18 +27,18 @@ const getAllProducts = async (desc, minPrice, maxPrice, categoryIds) => {
 const showProducts = async () => {
     const products = await getAllProducts();
     for (let i = 0; i < products.length; i++) {
-        var tmpProd = document.getElementById("temp-card");
+        var tmpProd = document.getElementById("temp-cart");
         var cln = tmpProd.content.cloneNode(true);
         cln.querySelector("img").src = "./images/" + products[i].productImage;
         cln.querySelector("h1").innerText = products[i].productName;
         cln.querySelector("p.description").innerText = products[i].productDescription;
         cln.querySelector("p.price").innerText = products[i].productPrice + '$';
-        cln.querySelector("button").addEventListener('click', () => { addToCard(products[i]) })     
+        cln.querySelector("button").addEventListener('click', () => { addTocart(products[i]) })     
         document.getElementById("PoductList").appendChild(cln);
     }
     document.getElementById("counter").innerText = products.length;
-    if (sessionStorage.MyCard != undefined) 
-        document.getElementById("ItemsCountText").innerText = (JSON.parse(sessionStorage.getItem("MyCard"))).length;  
+    if (sessionStorage.Mycart != undefined) 
+        document.getElementById("ItemsCountText").innerText = (JSON.parse(sessionStorage.getItem("Mycart"))).length;  
 }
 const getAllCartegories = async () => {
     try {
@@ -76,24 +76,23 @@ const filterProducts = async () => {
     let count = products.length;
     document.getElementById("counter").innerText = count;
     for (let i = 0; i < products.length; i++) {
-        var tmpProd = document.getElementById("temp-card");
+        var tmpProd = document.getElementById("temp-cart");
         var cln = tmpProd.content.cloneNode(true);
         cln.querySelector("img").src = "./images/" + products[i].productImage;
         cln.querySelector("h1").innerText = products[i].productName;
         cln.querySelector("p.description").innerText = products[i].productDescription;
         cln.querySelector("p.price").innerText = products[i].productPrice + '$';
-        cln.querySelector("button").addEventListener('click', () => { addToCard(products[i]) })     
+        cln.querySelector("button").addEventListener('click', () => { addTocart(products[i]) })     
         document.getElementById("PoductList").appendChild(cln);
     }
 }
 
-const addToCard = (product) => {
+const addTocart = (product) => {
     document.getElementById("ItemsCountText").innerText++;
-    if (sessionStorage.MyCard == undefined) sessionStorage.setItem("MyCard", "[]");
-    let card = JSON.parse(sessionStorage.getItem("MyCard"));
-    myCard = [...card, product];
-    let MyCard = JSON.stringify(myCard);
-    sessionStorage.MyCard = MyCard;
+    if (sessionStorage.Mycart == undefined) sessionStorage.setItem("Mycart", "[]");
+    let cart = JSON.parse(sessionStorage.getItem("Mycart"));
+    mycart = [...cart, product];
+    sessionStorage.Mycart =Mycart = JSON.stringify(mycart) ;
  }
 
 const TrackLinkID = () => {

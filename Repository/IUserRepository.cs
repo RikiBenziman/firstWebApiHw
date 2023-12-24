@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-namespace Repository
+namespace Repositories
 {
     public interface IUserRepository
     {

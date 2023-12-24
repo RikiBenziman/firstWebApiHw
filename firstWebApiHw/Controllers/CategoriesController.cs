@@ -3,9 +3,6 @@ using DTO;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using System.Collections.Generic;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace webApiShopSite.Controllers
 {
@@ -21,7 +18,7 @@ namespace webApiShopSite.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/<CtegoiesController>
+        // GET: api/<CategoiesController>
         [HttpGet]
         public async Task<IEnumerable<CategoryDto>> Get()
         {

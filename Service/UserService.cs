@@ -1,9 +1,8 @@
 ﻿
-
 using Entities;
-using Repository;
+using Repositories;
 
- namespace Service
+ namespace Services
 {
     public class UserService : IUserService
     {

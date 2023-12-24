@@ -1,9 +1,7 @@
 ﻿using Entities;
 using Microsoft.AspNetCore.Mvc;
-using Service;
 using Services;
 using DTO;
-using System.Collections.Generic;
 using AutoMapper;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

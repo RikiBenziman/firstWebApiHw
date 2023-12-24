@@ -1,12 +1,9 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata;
-using System.Text.Json;
-using Service;
 using Entities;
-using Repository;
 using DTO;
 using AutoMapper;
+using Services;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace firstWebApiHw.Controllers

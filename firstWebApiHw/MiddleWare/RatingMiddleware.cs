@@ -1,15 +1,8 @@
 ﻿using Entities;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components.RenderTree;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
 using Services;
-using System;
-using System.Threading.Tasks;
 
 namespace webApiShopSite.MiddleWare
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class RatingMiddleware
     {
         private readonly RequestDelegate _next;

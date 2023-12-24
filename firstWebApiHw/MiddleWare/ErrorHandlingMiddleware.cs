@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
-
+﻿
 namespace PresidentsApp.Middlewares
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
