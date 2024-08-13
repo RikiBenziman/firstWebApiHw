@@ -19,16 +19,16 @@ namespace Repositories
 
         public async Task<User> createNewUserAsync(User user)
         {
-            await _MySuperMarketContext.Users.AddAsync(user);
-            _MySuperMarketContext.SaveChangesAsync();
+           await _MySuperMarketContext.Users.AddAsync(user);
+           await _MySuperMarketContext.SaveChangesAsync();
             return user;
         }
 
         public async Task<User> updateAsync(int id, User userToUpdate)
         {
             userToUpdate.UserId=id;
-            _MySuperMarketContext.Users.Update(userToUpdate);
-            _MySuperMarketContext.SaveChangesAsync();
+             _MySuperMarketContext.Users.Update(userToUpdate);
+            await _MySuperMarketContext.SaveChangesAsync();
             return userToUpdate;
         }
        public async Task<User> getUserByIdAsync(int id)

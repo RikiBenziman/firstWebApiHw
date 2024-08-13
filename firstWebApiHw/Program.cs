@@ -21,7 +21,7 @@ builder.Services.AddTransient<IRatingRepository, RatingRepository>();
 builder.Services.AddTransient<IRatingService, RatingService>();
 
 
-builder.Services.AddDbContext<MySuperMarketContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MySchool")));
+builder.Services.AddDbContext<MySuperMarketContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyHome")));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddEndpointsApiExplorer();

@@ -27,7 +27,7 @@ const getAllProducts = async (desc, minPrice, maxPrice, categoryIds) => {
 const showProducts = async () => {
     const products = await getAllProducts();
     for (let i = 0; i < products.length; i++) {
-        var tmpProd = document.getElementById("temp-cart");
+        var tmpProd = document.getElementById("temp-card");
         var cln = tmpProd.content.cloneNode(true);
         cln.querySelector("img").src = "./images/" + products[i].productImage;
         cln.querySelector("h1").innerText = products[i].productName;
@@ -76,7 +76,7 @@ const filterProducts = async () => {
     let count = products.length;
     document.getElementById("counter").innerText = count;
     for (let i = 0; i < products.length; i++) {
-        var tmpProd = document.getElementById("temp-cart");
+        var tmpProd = document.getElementById("temp-card");
         var cln = tmpProd.content.cloneNode(true);
         cln.querySelector("img").src = "./images/" + products[i].productImage;
         cln.querySelector("h1").innerText = products[i].productName;
